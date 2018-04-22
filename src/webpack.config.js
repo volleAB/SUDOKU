@@ -10,14 +10,12 @@ module.exports = {
         extensions: [".js"]
     },
     module: {
-        loader: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: "babel",
-                exclude: "node_modules",
-                query: {
-                    presets: ["es2015"]
-                }
+                loader: "babel-loader",
+                exclude: ["sudoku/src/node_modules"], // 绝对路径
+                query: { presets: ["es2015"] }
             }
         ]
     }

@@ -1,15 +1,26 @@
-function makeRow(v = 0) {
-    const array = newArray(9);
-    array.fill(v);
-    return array;
+const toolkit = require("./toolkit");
+const matrix = toolkit.makeMatrix();
+
+class Grid {
+    constructor(container) {
+        this._$container = container;
+    }
+
+    build() {
+        const matrix = toolkit.makeMatrix();
+
+        const $cells = matrix.map(rowValues => rowValues.map(cellValue => {
+            return $("<span>").text(cellValue);
+        }));
+
+        const $divArray = $cells.map($spanArray => {
+            return $("<div>")
+                .addClass("row")
+                .append($spanArray);
+        });
+
+        this._$container.append($divArray);
+    }
 }
 
-function makeMatrix(v = 0) {
-    const array = new Array(9);
-    array.fill(makeRow(v));
-    return array;
-}
-
-const a = makeMatrix();
-a[0][1] = 2;
-console.log(a);
+new Grid($("#container")).build();
